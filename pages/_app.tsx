@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import { RequestServiceProvider } from "../services/http";
 
 export default function App({
   Component,
@@ -7,7 +8,16 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <RequestServiceProvider
+        config={{
+          timeout: 10000,
+          headers: {
+            ABC: "DEF",
+          },
+        }}
+      >
+        <Component {...pageProps} />
+      </RequestServiceProvider>
     </SessionProvider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios, { type AxiosRequestConfig, type AxiosInstance } from "axios";
 import { BaseResponse } from "../../types";
 
@@ -12,6 +12,7 @@ interface RequestServiceContextValuesType {
 
 interface RequestServiceProviderProps {
   children: JSX.Element;
+  config?: AxiosRequestConfig;
 }
 
 const createRequestService = (
@@ -31,6 +32,10 @@ const RequestServiceProvider: React.FC<RequestServiceProviderProps> = ({
   ...props
 }) => {
   const [config, setConfig] = useState<AxiosRequestConfig>({});
+
+  useEffect(() => {
+    setConfig(props.config || {});
+  }, [props.config]);
 
   const service = useMemo(
     () => ({ ...createRequestService(config), setRequestConfig: setConfig }),
