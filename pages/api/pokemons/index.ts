@@ -1,13 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Pokemon, PrismaClient } from "@prisma/client";
+import { BaseResponse } from "../../../types";
 
 const prisma = new PrismaClient();
-
-interface BaseResponse<T> {
-  data: T;
-  success: boolean;
-  msg?: string;
-}
 
 export default async function handler(
   req: NextApiRequest,
