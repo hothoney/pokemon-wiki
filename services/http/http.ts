@@ -5,7 +5,7 @@ import { RequestServiceContext } from "./request-provider";
 const COMMON_ERROR = new Error("请求方法调用错误");
 
 const http = {
-  get: <T, P = any>(url: string, params: P) => {
+  get: <T, P = any>(url: string, params?: P) => {
     const instance = useContext(RequestServiceContext)!.instance;
     if (!instance) {
       throw COMMON_ERROR;
@@ -23,7 +23,7 @@ const http = {
         });
     });
   },
-  post: <T, D = any>(url: string, data: D) => {
+  post: <T, D = any>(url: string, data?: D) => {
     const instance = useContext(RequestServiceContext)!.instance;
     if (!instance) {
       throw COMMON_ERROR;
@@ -39,7 +39,7 @@ const http = {
         });
     });
   },
-  put: <T, D = any>(url: string, data: D) => {
+  put: <T, D = any>(url: string, data?: D) => {
     const instance = useContext(RequestServiceContext)!.instance;
     if (!instance) {
       throw COMMON_ERROR;
@@ -55,14 +55,14 @@ const http = {
         });
     });
   },
-  delete: <T, D = any>(url: string, data: D) => {
+  delete: <T, P = any>(url: string, params?: P) => {
     const instance = useContext(RequestServiceContext)!.instance;
     if (!instance) {
       throw COMMON_ERROR;
     }
     return new Promise<[unknown, BaseResponse<T> | null]>((resolve) => {
       instance
-        .put(url, data)
+        .delete(url, { params })
         .then((res) => {
           resolve([null, res.data]);
         })
