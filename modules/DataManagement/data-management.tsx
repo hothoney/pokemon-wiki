@@ -7,10 +7,6 @@ const ProTable = dynamic(
   () => import("@ant-design/pro-components").then((mod) => mod.ProTable),
   { ssr: false, loading: () => <span>Loading...</span> }
 );
-const ModalForm = dynamic(
-  () => import("@ant-design/pro-components").then((mod) => mod.ModalForm),
-  { ssr: false, loading: () => <span>Loading...</span> }
-);
 
 const demoColumn: ProColumns<Record<string, any>, unknown>[] = [
   {
